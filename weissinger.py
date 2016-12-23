@@ -36,8 +36,16 @@ def weissinger_l(sp, root, tip, lam, tw, al, m):
       lam: quarter-chord sweep (degrees)
       tw: twist of tip relative to root, +ve up (degrees)
       al: angle of attack (degrees) at the root
-      m: number of points along the span (an odd number) """
+      m: number of points along the span (an odd number). 
 
+      Returns:
+      y: vector of points along span
+      cl: local 2D lift coefficient cl
+      ccl: cl * local chord (proportional to sectional lift)
+      al_i: local induced angle of attack
+      CL: lift coefficient for entire wing
+      CDi: induced drag coefficient for entire wing """
+      
   # Convert angles to radians
   lam = lam*pi/180.
   tw = tw*pi/180.
@@ -142,4 +150,4 @@ def weissinger_l(sp, root, tip, lam, tw, al, m):
   CL /= area
   CDi /= area
 
-  return y, cl, ccl, al_i*180./pi, CL, CDi
+  return y*sp/2., cl, ccl, al_i*180./pi, CL, CDi
