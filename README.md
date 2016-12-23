@@ -1,3 +1,4 @@
+#weissinger
 The Weissinger-L method is an extension of Prandtl's lifting line theory to swept and tapered wings. It is also valid to lower aspect ratios than lifting line theory. The usual linear aerodynamics assumptions apply. This code is an implementation of the Weissinger-L method in Python. For a given wing geometry, it reports the lift and induced drag coefficients and creates plots of the lift distribution and wing shape.
 
 You need:
