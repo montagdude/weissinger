@@ -75,7 +75,7 @@ def weissinger_l(wing, al, m):
 
   # Compute theta and n
   for i in range(O):
-    theta[i] = i*pi/float(O-1)
+    theta[i] = (i+1)*pi/float(O+1)
     n[i]     = cos(theta[i])
   n0 = 1.
   phi0 = 0.
