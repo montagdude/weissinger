@@ -28,13 +28,13 @@ def l_function(lam, spc, y, n):
 
   return weissl 
 
-def weissinger_l(sp, root, tip, lam, tw, al, m):
+def weissinger_l(wing, al, m): 
   """ Weissinger-L method for a swept, tapered, twisted wing.
-      sp: span
-      root: chord at the root
-      tip: chord at the tip
-      lam: quarter-chord sweep (degrees)
-      tw: twist of tip relative to root, +ve up (degrees)
+      wing.span: span
+      wing.root: chord at the root
+      wing.tip: chord at the tip
+      wing.sweep: quarter-chord sweep (degrees)
+      wing.washout: twist of tip relative to root, +ve down (degrees)
       al: angle of attack (degrees) at the root
       m: number of points along the span (an odd number). 
 
@@ -45,10 +45,10 @@ def weissinger_l(sp, root, tip, lam, tw, al, m):
       al_i: local induced angle of attack
       CL: lift coefficient for entire wing
       CDi: induced drag coefficient for entire wing """
-      
+
   # Convert angles to radians
-  lam = lam*pi/180.
-  tw = tw*pi/180.
+  lam = wing.sweep*pi/180.
+  tw = -wing.washout*pi/180.
   al = al*pi/180.
 
   # Initialize solution arrays
@@ -67,11 +67,11 @@ def weissinger_l(sp, root, tip, lam, tw, al, m):
 
   # Compute phi, y, chord, span/chord, and twist on full span
   for i in range(m):
-    phi[i]   = (i+1)*pi/float(m+1)       #b[v,v] goes to infinity at phi=0
-    y[i]     = cos(phi[i])               #y* = y/l
-    c[i]     = root + (tip-root)*y[i]    #local chord
-    spc[i]   = sp/c[i]                   #span/(local chord)
-    twist[i] = abs(y[i])*tw              #local twist
+    phi[i]   = (i+1)*pi/float(m+1)                   #b[v,v] goes to infinity at phi=0
+    y[i]     = cos(phi[i])                           #y* = y/l
+    c[i]     = wing.root + (wing.tip-wing.root)*y[i] #local chord
+    spc[i]   = wing.span/c[i]                        #span/(local chord)
+    twist[i] = abs(y[i])*tw                          #local twist
 
   # Compute theta and n
   for i in range(O):
@@ -108,11 +108,11 @@ def weissinger_l(sp, root, tip, lam, tw, al, m):
         g[j,i] += Ljr*fir;
       g[j,i] = -1./float(2*(O+1)) * ((Lj0*fi0 + LjO1*fiO1)/2. + g[j,i])
 
-      if i == j: A[j,i] = b[j,i] + sp/(2.*c[j])*g[j,i]
-      else: A[j,i] = sp/(2.*c[j])*g[j,i] - b[j,i]
+      if i == j: A[j,i] = b[j,i] + wing.span/(2.*c[j])*g[j,i]
+      else: A[j,i] = wing.span/(2.*c[j])*g[j,i] - b[j,i]
 
   # Scale the A matrix
-  A *= 1./sp 
+  A *= 1./wing.span 
 
   # Calculate ccl
   ccl = np.linalg.solve(A, rhs)
@@ -120,7 +120,7 @@ def weissinger_l(sp, root, tip, lam, tw, al, m):
   # Add a point at the tip where the solution is known
   y = np.hstack((np.array([1.]), y))
   ccl = np.hstack((np.array([0.]), ccl[:,0]))
-  c = np.hstack((np.array([tip]), c))
+  c = np.hstack((np.array([wing.tip]), c))
   twist = np.hstack((np.array([tw]), twist))
 
   # Return only the right-hand side (symmetry)
@@ -147,7 +147,7 @@ def weissinger_l(sp, root, tip, lam, tw, al, m):
     CL += dCL
     CDi += dCDi
     area += dA
-  CL /= area
+  CL /= area 
   CDi /= area
 
-  return y*sp/2., cl, ccl, al_i*180./pi, CL, CDi
+  return y*wing.span/2., cl, ccl, al_i*180./pi, CL, CDi

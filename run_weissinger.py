@@ -32,14 +32,13 @@ if __name__ == "__main__":
   wing = Wing(inputs.span, inputs.root, inputs.tip, inputs.sweep,
               inputs.washout)
 
-  y, cl, ccl, al_i, CL, CDi = weissinger_l(inputs.span, inputs.root, inputs.tip,
-                                           inputs.sweep, -inputs.washout,
-                                           inputs.alpha, 2*inputs.npoints-1)
-
-  create_plot(wing, y, cl, ccl)
+  y, cl, ccl, al_i, CL, CDi = weissinger_l(wing, inputs.alpha,
+                                           2*inputs.npoints-1)
 
   print("{:<6}".format("Area: ") + str(wing.area))
   print("{:<6}".format("AR: ") + str(wing.aspect_ratio))
   print("{:<6}".format("MAC: ") + str(wing.cbar))
   print("{:<6}".format("CL: ") + str(CL))
   print("{:<6}".format("CDi: ") + str(CDi))
+
+  create_plot(wing, y, cl, ccl)
