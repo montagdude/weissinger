@@ -83,7 +83,9 @@ def weissinger_l(wing, al, m):
   phiO1 = pi
 
   # Construct the A matrix, which is the analog to the 2D lift slope
+  print("Calculating aerodynamics ...")
   for j in range(m):
+    print("Point " + str(j+1) + " of " + str(m))
     rhs[j,0] = al + twist[j]
 
     for i in range(m):
