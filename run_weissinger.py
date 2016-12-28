@@ -32,6 +32,7 @@ def create_plot(wing, y, cl, ccl, CL, CDi):
 
 if __name__ == "__main__":
 
+  print("Calculating aerodynamics ...")
   wing = Wing(inputs.span, inputs.root, inputs.tip, inputs.sweep,
               inputs.washout)
 
