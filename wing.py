@@ -66,8 +66,8 @@ class Wing:
     ax.plot(y, x, 'k')
     ax.set_xlabel('y')
     ax.set_ylabel('x')
-    ax.set_xlim(-self.ytip-yrng/8., self.ytip+yrng/8.)
-    ax.set_ylim(min(x)-xrng/8., max(x)+xrng/8.)
+    ax.set_xlim(-self.ytip-yrng/7., self.ytip+yrng/7.)
+    ax.set_ylim(min(x)-xrng/7., max(x)+xrng/7.)
     ax.set_aspect('equal', 'datalim')
     ax.set_ylim(ax.get_ylim()[::-1])
     ax.annotate("Area: {:.4f}\nAR: {:.4f}\nMAC: {:.4f}".format(self.area, 

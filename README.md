@@ -8,7 +8,7 @@ You need:
 
 If you use Linux, these are all likely available through your distribution's repositories. Alternatively, or if you use Windows, you can use a prepackaged Python suite such as Enthought Canopy, or Anaconda.
 
-To run, edit inputs.py as desired and double-click run_weissinger.py. You can also run in a terminal window/command prompt as follows:
+To run, edit inputs.py as desired and double-click run_weissinger.py. (You may need to select Python as the application to run the filetype first). You can also run in a terminal window/command prompt as follows:
 ./run_weissinger.py (Linux, Mac OSX)
                  or
 python.exe run_weissinger.py (Windows)
