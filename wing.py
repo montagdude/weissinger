@@ -70,3 +70,7 @@ class Wing:
     ax.set_ylim(min(x)-xrng/8., max(x)+xrng/8.)
     ax.set_aspect('equal', 'datalim')
     ax.set_ylim(ax.get_ylim()[::-1])
+    ax.annotate("Area: {:.4f}\nAR: {:.4f}\nMAC: {:.4f}".format(self.area, 
+                self.aspect_ratio, self.cbar), xy=(0.02,0.95),
+                xycoords='axes fraction', verticalalignment='top',
+                bbox=dict(boxstyle='square', fc='w', ec='m'), color='m')

@@ -7,7 +7,7 @@ import inputs
 from wing import Wing
 from weissinger import weissinger_l
 
-def create_plot(wing, y, cl, ccl):
+def create_plot(wing, y, cl, ccl, CL, CDi):
   """ Plots lift distribution and wing geometry """
 
   # Mirror to left side for plotting
@@ -23,6 +23,9 @@ def create_plot(wing, y, cl, ccl):
   axarr[0].set_ylabel('Sectional lift coefficient')
   axarr[0].legend(['Cl', 'cCl / MAC'], numpoints=1)
   axarr[0].grid()
+  axarr[0].annotate("CL: {:.4f}\nCDi: {:.5f}".format(CL,CDi), xy=(0.02,0.95), 
+                    xycoords='axes fraction', verticalalignment='top', 
+                    bbox=dict(boxstyle='square', fc='w', ec='m'), color='m')
 
   wing.plot(axarr[1])
   plt.show()
@@ -41,4 +44,4 @@ if __name__ == "__main__":
   print("{:<6}".format("CL: ") + str(CL))
   print("{:<6}".format("CDi: ") + str(CDi))
 
-  create_plot(wing, y, cl, ccl)
+  create_plot(wing, y, cl, ccl, CL, CDi)

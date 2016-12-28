@@ -124,7 +124,7 @@ def weissinger_l(wing, al, m):
   twist = np.hstack((np.array([tw]), twist))
 
   # Return only the right-hand side (symmetry)
-  nrhs = (m+1)/2+1
+  nrhs = int((m+1)/2)+1    # Explicit int conversion needed for Python3
   y = y[0:nrhs]
   ccl = ccl[0:nrhs]
 
