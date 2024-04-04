@@ -67,11 +67,11 @@ def weissinger_l(wing, al, m):
 
   # Compute phi, y, chord, span/chord, and twist on full span
   for i in range(m):
-    phi[i]   = (i+1)*pi/float(m+1)                   #b[v,v] goes to infinity at phi=0
-    y[i]     = cos(phi[i])                           #y* = y/l
-    c[i]     = wing.root + (wing.tip-wing.root)*y[i] #local chord
-    spc[i]   = wing.span/c[i]                        #span/(local chord)
-    twist[i] = abs(y[i])*tw                          #local twist
+    phi[i]   = (i+1)*pi/float(m+1)                          #b[v,v] goes to infinity at phi=0
+    y[i]     = cos(phi[i])                                  #y* = y/l
+    c[i]     = wing.root + (wing.tip-wing.root)*abs(y[i])   #local chord
+    spc[i]   = wing.span/c[i]                               #span/(local chord)
+    twist[i] = abs(y[i])*tw                                 #local twist
 
   # Compute theta and n
   for i in range(O):
